@@ -1,0 +1,122 @@
+/* Shared game area */
+.gameArea {
+  position: relative;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--gradient-hero);
+  user-select: none;
+}
+
+.gameHint {
+  position: absolute; top: var(--space-3); left: 50%;
+  transform: translateX(-50%);
+  z-index: 10; white-space: nowrap;
+  background: rgba(0,0,0,0.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs); font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.gameScore {
+  position: absolute; top: var(--space-3); right: var(--space-4); z-index: 10;
+  font-size: var(--text-xs); font-weight: var(--font-semibold);
+  color: var(--color-text-muted);
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(6px);
+  padding: var(--space-1) var(--space-3); border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+
+/* Bubble Pop */
+.bubble {
+  position: absolute; transform: translate(-50%,-50%);
+  border-radius: 50%; cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+.bubble:hover { filter: brightness(1.1); }
+
+.popEffect {
+  position: absolute; transform: translate(-50%,-50%);
+  font-size: 1.2rem; pointer-events: none; z-index: 20;
+}
+
+/* Falling Stars */
+.fallingItem {
+  position: absolute; transform: translate(-50%,-50%);
+  cursor: pointer; background: none; border: none;
+  line-height: 1; transition: transform var(--transition-fast);
+}
+.fallingItem:active { transform: translate(-50%,-50%) scale(1.3); }
+
+.trailEffect {
+  position: absolute; transform: translate(-50%,-50%);
+  font-size: 1.2rem; pointer-events: none; z-index: 20;
+  animation: fadeOut 0.5s ease forwards;
+}
+@keyframes fadeOut { to { opacity: 0; transform: translate(-50%,-60%) scale(1.5); } }
+
+/* Particle Canvas */
+.particleCanvas {
+  display: block; width: 100%; height: 100%;
+  cursor: crosshair; touch-action: none;
+}
+
+.paletteBtn {
+  position: absolute; bottom: var(--space-3); right: var(--space-4); z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255,255,255,0.15); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius-full);
+  color: white; font-size: var(--text-xs); font-weight: var(--font-semibold); cursor: pointer;
+}
+
+/* Connect Dots */
+.resetBtn {
+  position: absolute; bottom: var(--space-3); right: var(--space-4); z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  background: rgba(125,167,217,0.15); backdrop-filter: blur(6px);
+  border: 1px solid rgba(125,167,217,0.3); border-radius: var(--radius-full);
+  color: var(--color-primary-dark); font-size: var(--text-xs); font-weight: var(--font-semibold); cursor: pointer;
+}
+
+/* Shape Arrangement */
+.shapePalette {
+  position: absolute; top: var(--space-12); left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; gap: var(--space-2);
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border); border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+}
+
+.shapePaletteBtn {
+  font-size: 1.4rem; cursor: pointer; background: none; border: none;
+  transition: transform var(--transition-fast); border-radius: var(--radius-sm); padding: 2px 4px;
+}
+.shapePaletteBtn:hover { transform: scale(1.2); }
+
+.clearShapesBtn { font-size: 1.1rem; cursor: pointer; background: none; border: none; opacity: 0.6; }
+
+.shapeCanvas {
+  position: absolute; inset: 0; top: 80px;
+  overflow: hidden;
+}
+
+.placedShape {
+  position: absolute; transform: translate(-50%,-50%);
+  cursor: grab; line-height: 1; display: block;
+}
+.placedShape:active { cursor: grabbing; }
+
+.shapeEmpty {
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%);
+  font-size: var(--text-sm); color: var(--color-text-light); text-align: center;
+}
+
+.shapeTip {
+  position: absolute; bottom: var(--space-3); left: 50%; transform: translateX(-50%);
+  font-size: var(--text-xs); color: var(--color-text-light); white-space: nowrap;
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(4px);
+  padding: var(--space-1) var(--space-4); border-radius: var(--radius-full);
+}

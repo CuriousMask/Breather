@@ -1,0 +1,99 @@
+.canvas {
+  position: relative; width: 100%; height: 100%;
+  overflow: hidden; border-radius: var(--radius-xl);
+  cursor: crosshair; user-select: none;
+}
+
+/* ── Room background ── */
+.roomBg { position: absolute; inset: 0; }
+
+.wall {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 60%; transition: background 0.6s ease;
+}
+
+.floor {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 42%;
+  transition: background 0.6s ease;
+  /* Subtle floor gradient for depth */
+  background-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.08) 100%) !important;
+  background-blend-mode: multiply;
+}
+
+.skirtingBoard {
+  position: absolute; left: 0; right: 0;
+  height: 6px;
+  bottom: 42%; /* sits at wall-floor join */
+}
+
+.lightOverlay {
+  position: absolute; inset: 0; pointer-events: none;
+  transition: background 0.6s ease;
+}
+
+.lightBeam {
+  position: absolute;
+  top: 0; left: 62%; width: 120px; bottom: 0;
+  background: linear-gradient(135deg, rgba(255,235,180,0.18) 0%, transparent 60%);
+  transform: skewX(-8deg);
+  pointer-events: none;
+}
+
+/* ── Empty hint ── */
+.emptyHint {
+  position: absolute; top: 48%; left: 50%; transform: translate(-50%,-50%);
+  z-index: 5; pointer-events: none; text-align: center;
+}
+.emptyHint p {
+  font-size: var(--text-sm); color: rgba(100,100,100,0.7);
+  background: rgba(255,255,255,0.6); backdrop-filter: blur(6px);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-full);
+  margin: 0; border: 1px dashed rgba(125,167,217,0.4);
+}
+
+/* ── Objects ── */
+.placedObject {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  cursor: grab; border-radius: var(--radius-sm);
+  transition: filter 0.15s;
+}
+.placedObject:active { cursor: grabbing; }
+
+.selectedObj {
+  filter: drop-shadow(0 0 10px rgba(125,167,217,0.9));
+  outline: 2px dashed rgba(125,167,217,0.7);
+  border-radius: var(--radius-sm);
+}
+
+.objEmoji { display: block; line-height: 1; pointer-events: none; }
+
+/* ── Selection controls ── */
+.controls {
+  position: absolute; top: -38px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 3px; z-index: 50;
+}
+
+.controlBtn {
+  width: 28px; height: 28px;
+  background: white; border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem; font-weight: var(--font-bold);
+  color: var(--color-text); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+.controlBtn:hover { border-color: var(--color-primary); color: var(--color-primary); background: rgba(125,167,217,0.08); }
+.removeBtn:hover  { border-color: var(--color-error); color: var(--color-error) !important; }
+
+/* ── Selection hint ── */
+.selHint {
+  position: absolute; bottom: var(--space-4); left: 50%; transform: translateX(-50%);
+  z-index: 20; font-size: var(--text-xs); color: rgba(80,80,80,0.8);
+  background: rgba(255,255,255,0.75); backdrop-filter: blur(6px);
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-full);
+  pointer-events: none; white-space: nowrap;
+  border: 1px solid rgba(125,167,217,0.3);
+}

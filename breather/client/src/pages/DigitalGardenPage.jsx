@@ -12,6 +12,7 @@ const DigitalGardenPage = () => {
     saveStatus, isLoading,
     setSelected,
     loadGarden, addObject, moveObject, removeObject,
+    scaleObject, rotateObject,
     changeEnvironment, changeWeather, clearGarden, saveGarden,
   } = useGarden();
 
@@ -71,6 +72,8 @@ const DigitalGardenPage = () => {
                 onDrop={addObject}
                 onDragEnd={moveObject}
                 onRemove={removeObject}
+                onScale={scaleObject}
+                onRotate={rotateObject}
               />
             )}
           </div>

@@ -13,57 +13,62 @@
   outline: none;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+}
+
+/* Focus ring — WCAG 2.4.7 */
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* Sizes */
-.sm  { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
-.md  { padding: var(--space-3) var(--space-6); font-size: var(--text-sm); }
-.lg  { padding: var(--space-4) var(--space-8); font-size: var(--text-base); }
+.sm  { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); min-height: 32px; }
+.md  { padding: var(--space-3) var(--space-6); font-size: var(--text-sm); min-height: 40px; }
+.lg  { padding: var(--space-4) var(--space-8); font-size: var(--text-base); min-height: 48px; }
 
 /* Variants */
 .primary {
   background: var(--gradient-primary);
-  color: white;
-  box-shadow: 0 4px 15px rgba(125, 167, 217, 0.4);
+  color: #FFFFFF !important;          /* always white — WCAG AA on blue */
+  box-shadow: 0 4px 15px rgba(59,130,246,0.35);
 }
-
 .primary:hover:not(:disabled) {
-  box-shadow: 0 6px 20px rgba(125, 167, 217, 0.55);
+  box-shadow: 0 6px 20px rgba(59,130,246,0.50);
+  transform: translateY(-1px);
+  color: #FFFFFF !important;
 }
 
 .secondary {
-  background: var(--glass-bg);
-  color: var(--color-text);
+  background: #FFFFFF;
+  color: var(--color-text) !important;  /* #111827 — high contrast */
   border: 1.5px solid var(--color-border-strong);
-  backdrop-filter: var(--glass-blur);
 }
-
 .secondary:hover:not(:disabled) {
-  background: white;
+  background: var(--color-bg-secondary);
   border-color: var(--color-primary);
-  color: var(--color-primary);
+  color: var(--color-primary-dark) !important;
   box-shadow: var(--shadow-md);
 }
 
 .ghost {
   background: transparent;
-  color: var(--color-primary);
+  color: var(--color-primary-dark) !important;
   border: 1.5px solid var(--color-primary);
 }
-
 .ghost:hover:not(:disabled) {
   background: var(--color-primary);
-  color: white;
+  color: #FFFFFF !important;
 }
 
 .danger {
-  background: linear-gradient(135deg, #ef7070, #e55252);
-  color: white;
-  box-shadow: 0 4px 15px rgba(239, 112, 112, 0.3);
+  background: linear-gradient(135deg, #DC2626, #b91c1c);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px rgba(220,38,38,0.30);
 }
-
 .danger:hover:not(:disabled) {
-  box-shadow: 0 6px 20px rgba(239, 112, 112, 0.45);
+  box-shadow: 0 6px 20px rgba(220,38,38,0.45);
+  transform: translateY(-1px);
 }
 
 /* States */
@@ -72,6 +77,7 @@
 .loading, .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .icon { font-size: 1.05em; line-height: 1; }

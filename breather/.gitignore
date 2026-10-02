@@ -3,10 +3,11 @@ node_modules/
 client/node_modules/
 server/node_modules/
 
-# Environment variables
+# Environment variables (keep .env.example, ignore actual .env)
 .env
 client/.env
 server/.env
+*.env.local
 
 # Build outputs
 client/dist/

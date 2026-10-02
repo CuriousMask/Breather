@@ -28,6 +28,13 @@ const RoomBackground = ({ wallColor, floorColor, lighting }) => {
   );
 };
 
+/* ─── BUG FIX: resolve by variant id first, then type ─── */
+const resolveRoomDef = (obj) =>
+  ROOM_OBJECTS.find((d) => d.id === obj.variant) ||
+  ROOM_OBJECTS.find((d) => d.id === obj.type)    ||
+  ROOM_OBJECTS.find((d) => d.type === obj.type)  ||
+  null;
+
 /* ─── Selection controls ─── */
 const SelectionControls = ({ onScale, onRotate, onRemove }) => (
   <motion.div
@@ -35,19 +42,20 @@ const SelectionControls = ({ onScale, onRotate, onRemove }) => (
     initial={{ scale: 0, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
     transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+    onClick={(e) => e.stopPropagation()}
   >
-    <button className={styles.controlBtn} onClick={() => onScale(0.1)}  title="Scale up">+</button>
-    <button className={styles.controlBtn} onClick={() => onScale(-0.1)} title="Scale down">−</button>
-    <button className={styles.controlBtn} onClick={() => onRotate(45)}  title="Rotate">↻</button>
-    <button className={`${styles.controlBtn} ${styles.removeBtn}`} onClick={onRemove} title="Remove">✕</button>
+    <button className={styles.controlBtn} onClick={() => onScale(0.15)} title="Scale up" aria-label="Scale up">＋</button>
+    <button className={styles.controlBtn} onClick={() => onScale(-0.15)} title="Scale down" aria-label="Scale down">－</button>
+    <button className={styles.controlBtn} onClick={() => onRotate(45)} title="Rotate 45°" aria-label="Rotate">↻</button>
+    <button className={`${styles.controlBtn} ${styles.removeBtn}`} onClick={onRemove} title="Remove" aria-label="Remove">✕</button>
   </motion.div>
 );
 
 /* ─── Placed room object ─── */
 const PlacedObject = ({ obj, isSelected, onSelect, onDragEnd, onScale, onRotate, onRemove }) => {
-  const def  = ROOM_OBJECTS.find((d) => d.id === obj.variant || d.type === obj.type);
+  const def   = resolveRoomDef(obj);
   const emoji = def?.icon || '📦';
-  const size  = 48 * (obj.scale || 1);
+  const size  = 52 * (obj.scale || 1);
 
   return (
     <motion.div

@@ -61,7 +61,7 @@
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
   text-decoration: none;
-  color: var(--color-text-muted);
+  color: var(--color-text-muted);     /* #374151 — WCAG AA */
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   position: relative;
@@ -69,13 +69,13 @@
 }
 
 .navLink:hover {
-  color: var(--color-text);
-  background: rgba(125, 167, 217, 0.08);
+  color: var(--color-text);           /* #111827 */
+  background: rgba(59,130,246,0.07);
 }
 
 .navLink.active {
-  color: var(--color-primary);
-  background: rgba(125, 167, 217, 0.12);
+  color: var(--color-primary-dark);   /* #1D4ED8 — WCAG AA */
+  background: var(--color-primary-bg);
   font-weight: var(--font-semibold);
 }
 
